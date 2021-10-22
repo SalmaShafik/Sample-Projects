@@ -1,0 +1,275 @@
+import java.util.*;
+import java.util.ArrayList;
+public class Main
+{ 
+     
+  public static void main (String[]args)
+  {
+   
+    Scanner input = new Scanner (System.in);
+    int password = 123;  //Admin password
+    int Cpassword = 1234; //Cashier Password
+    double sum = 0; 
+    int count; 
+ int index = 0;
+ //counter to count how many times the user enters wrong password
+int  passwordcounter = 0 ;  
+
+//quantity taken from user
+  int q ;  
+  //new stock
+         int decreasedQuantity;
+         
+    String item;
+    
+    // Menu Items "Names" ArrayList declaration
+     ArrayList < String > menu = new ArrayList < String > (); 
+     
+     //ArrayList adding items by add() method
+  menu.add ("Cup Cake");
+      menu.add ("Cheese Cake");
+      menu.add ("Molten Cake");
+      menu.add ("Brownies");
+      menu.add ("Ice Cream");
+      
+       // Menu Items "Prices" ArrayList declaration
+      ArrayList < Integer > menuPrice = new ArrayList < Integer > ();
+      
+      //ArrayList adding items by add() method
+      menuPrice.add (15);
+      menuPrice.add (20);
+      menuPrice.add (35);
+      menuPrice.add (30);
+      menuPrice.add (10);
+      
+      
+         //Arraylist for Stock
+      
+      ArrayList<Integer> stock = new ArrayList<Integer> ();
+      stock.add(10);
+      stock.add(2);
+      stock.add(5);
+      stock.add(7);
+      stock.add(1);
+      
+      //infinit while loop to ask which user wants to access system
+    while (true)
+      {
+
+	System.out.println("Are you  1-Admin  or  2-Cashier ");
+	
+	//takes user input to check admin or cashier
+	int User = input.nextInt ();
+	
+// when user enters 1 he enters the admin portal
+	if (User == 1)
+	  {
+	      //program takes the declared pass from admin
+	    System.out.print ("Enter Password  "); 
+	    
+	    //takes password from admin
+	    password = input.nextInt ();
+	    
+	    //check if password  is correct and also checks if its entered 3 times wrong
+	    while (password != 123 &&passwordcounter < 2) 
+	    {
+	        System.out.println("incorrect password try again");
+	        password=input.nextInt();
+	        
+	        //counter to count till 3 if admin keeps entering wrong password
+	        passwordcounter++;
+	        
+	    }  if (password != 123){ //if statement if the admin typed wrong password 3 times
+                System.out.println("you entered the wrong password 3 times");
+                 passwordcounter = 0;  //counter reset so message won't pop up the next login
+                continue;    //resets counter and leaves the admin while loop
+            }else {
+                passwordcounter = 0; }   //resets counter so the message doesn't pop up the next time admin logs in
+	   
+	   
+	    //Admin Menu
+	   System.out.print ("Choose a task 1-Add  2- Modify  3- Delete  4- Exit " + "\n"); 
+	    int Task = input.nextInt ();
+	  while (Task == 1 ) {     //First option is to add selected from admin menu
+	       
+		System.out.print("Enter the item you want to add (Name, Price and Stock quantity) " + "\n");
+		
+		//take inputs from admin
+		item = input.nextLine();       
+		   menu.add(input.nextLine()); 
+         menuPrice.add(input.nextInt());
+         stock.add(input.nextInt());
+         System.out.println("Item Added Successfully");
+         
+         //display menu items using for each loop and index by indexOf() method to show the added items
+         for (String i : menu) {
+  System.out.println(menu.indexOf(i) + "-" + i);
+                     
+                      }  
+         System.out.print("Do you want to add something else" +"\n" +" 1- Yes" + "\n" +" 2 - No" + "\n");
+                     int s = input.nextInt();
+                     if(s !=2){ continue;}  //continue inside add or break out to the infinit while loop
+                     else{break;} 
+                              
+         }
+         while(Task == 2){  //Second option is to modify option selected from admin menu
+             
+             System.out.print("Enter item number you want modify and it's new name " + "\n" );
+             
+               //display menu items using for each loop and index by indexOf() method
+             for (String i : menu) {
+  System.out.println(menu.indexOf(i) + "-" + i);
+              }
+              // Take index of item from user and modifying in it using set() method
+               int menuIndex = input.nextInt();
+              String p = input.nextLine();
+             menu.set(menuIndex,input.nextLine());
+              for (String i : menu) {
+  System.out.println(menu.indexOf(i) + "-" + i);
+              }
+              System.out.println("Name Modified Successfully ");
+              System.out.print("Enter item number and its new or current price " + "\n");
+              int newp = input.nextInt();    //Adds the price in the price arraylist corresponding to the item name idex
+                    menuPrice.set(menuIndex, input.nextInt());
+               
+  System.out.println("Price added Successfully ");
+                      
+                     
+                  System.out.print("Do you want to modify something else" +"\n" +" 1- Yes" + "\n" +" 2 - No" + "\n");
+                     int s = input.nextInt();
+                     if(s !=2){ continue;}else{break;}   //continue inside add or break out to the infinit while loop
+        }  
+              while(Task == 3){ //Third option is delete in the admin menu displayed
+            
+            System.out.print("Enter the number of item you want to delete" + "\n");
+            for (String i : menu) {           
+  System.out.println(menu.indexOf(i) + "-" + i);
+                      }     
+                      int menudelete = input.nextInt();  //takes input as the index of the element to be deleted
+                      menu.remove(menudelete);
+                      menuPrice.remove(menudelete);   // remove() method to delete items
+                     //display menu items using for each loop and index by indexOf() method
+                         for (String i : menu) {
+                       System.out.println(menu.indexOf(i) + "-" + i); 
+
+                       }
+          System.out.print("Item Deleted Successfully  " + "\n");
+
+                   System.out.print("Do you want to delete anything else" +"\n" +" 1- Yes" + "\n" +" 2 - No" + "\n");
+                     int s = input.nextInt();
+                     if(s !=2){ continue;}else{break;}
+        }  while(Task == 4 ){
+            break;
+        }
+
+    
+	      
+	  }
+	      	
+		  else if (User == 2 ){
+    System.out.print ("Enter Password  ");
+	    Cpassword = input.nextInt (); //program takes the declared pass from Cashier
+	
+	    while (Cpassword != 1234 &&passwordcounter < 2) //check password
+	    {
+	        System.out.println("incorrect password try again");
+	        Cpassword=input.nextInt();
+	        passwordcounter++;
+	    }  if (Cpassword != 1234){
+                System.out.println("you entered the wrong password 3 times");
+                 passwordcounter = 0;
+                continue;
+            }else {
+                passwordcounter = 0; }
+//Display menu for cashier using for each loop and index by indexOf() method
+
+ for (String i : menu) {
+  System.out.println(menu.indexOf(i) + "-" + i);
+                      }  
+while(true){
+ 
+System.out.println("Please choose item number  ");
+
+        //takes input from the user to use it as an index 
+            int n = input.nextInt();
+            int t = menuPrice.get(n);  //put the index in a variable to use its content in operations
+            int st = stock.get(n);   //get the index of the stock to use it in the operations
+            
+              
+            
+            System.out.println("Enter your desired quantity ");
+          
+             q = input.nextInt();
+           //check availability and check if quantity is less than or equal to stock  
+               if ( st > 0 && q <= st ){
+                   
+               //decrease from the stock 
+                 decreasedQuantity =  st - q ;
+                 
+          // multilpies the price  inside the index entered with quantity entered by user
+            int TotalPrice = q * t;
+            
+            //adds the total order
+             sum += TotalPrice;
+           
+           //modify the arraylist with the new stock depending on quantity taken from it  
+              stock.set( n , (decreasedQuantity));
+
+    
+          
+            }
+             else{   //if out of stock or quantity ordered is more than stock
+               System.out.print("Item out of stock please choose another item " + "\n");
+                for (String i : menu) {
+  System.out.println(menu.indexOf(i) + "-" + i);
+                      }  
+                continue;
+            } 
+ 
+System.out.println("Do you want anything else? for Yes press 1, for No press 2");
+//option is the input from user to check whether to continue order or display the amount to pay
+int option=input.nextInt();
+
+//check option entered in switch statement
+switch (option){
+    case 1:    //Cashier will continue and menu will be displayed again
+        for (String i : menu) {
+  System.out.println(menu.indexOf(i) + "-" + i);
+                      }   
+continue;
+
+case 2:   // The total money will be displayed to cashier and exits the order
+    System.out.println("Your total order price is  " + sum);
+break;
+	    
+} 
+
+//Ask cashier to continue taking orders or exit 
+while (true){
+System.out.print("Next order ? " + "\n" + "1 - No we're closed" + "\n" + "2- Yes " + "\n");
+
+//input to check whether Cashier will keep taking orders or exit
+int o = input.nextInt();
+
+   if (o != 1 && o == 2){
+       //continue inside the cashier while loop
+            for (String i : menu) {
+  System.out.println(menu.indexOf(i) + "-" + i);
+                      }  
+       
+   } else if (o !=1 && o !=2) {  System.out.println("Your entered an invalid value" + "\n" );      //break out of the cashier infinit while loop
+            
+              continue ;   
+
+   } else {break;}
+
+		  }   break;  }
+}
+      else {
+          //if user entered another option other than admin or cashier
+    System.out.println("Enter a valid option");  
+     }
+	  
+  }
+}  
+  }
